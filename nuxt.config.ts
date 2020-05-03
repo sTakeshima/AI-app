@@ -1,8 +1,15 @@
 import colors from 'vuetify/es5/util/colors'
-import NuxtConfiguration from '@nuxt/config'
+//import NuxtConfiguration from '@nuxt/config'
+import { Configuration } from '@nuxt/types'
 
-const config: NuxtConfiguration = {
+//const config: NuxtConfiguration = {
+const config: Configuration  =  {
   mode: 'universal',
+  buildModules: [
+    // Doc: https://github.com/nuxt-community/eslint-module
+    '@nuxtjs/eslint-module',
+    '@nuxt/typescript-build' // <- 追加
+  ],
 
   server: {
     port: 3000, // デフォルト: 3000
@@ -103,4 +110,5 @@ const config: NuxtConfiguration = {
     extend(config, ctx) {}
   }
 };
+//module.exports = nuxtConfig
 export default config

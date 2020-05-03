@@ -18,16 +18,21 @@
       </v-container>
     </v-content>
     <v-footer app>
-      <span>&copy; 2019 norwegian Geek</span>
+      <span>&copy; 2019</span>
     </v-footer>
   </v-app>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-export default Vue.extend({
-  
-})
+  import { Vue, Component} from 'nuxt-property-decorator'
+  import { appStore } from '@/store';
+
+  @Component
+  export default class extends Vue {
+    get title() {
+      return appStore.title;
+    }
+  }
 </script>
 
 <style>

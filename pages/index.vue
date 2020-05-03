@@ -17,13 +17,34 @@
 
 <script lang="ts">
 import {Vue,  Component} from 'nuxt-property-decorator'
+import { appStore } from '@/store';
 
 @Component({
   components: {
-    FormCard: () => import('@/components/FormCard.vue')
+    FormCard: () => import('@/components/Form/FormCard.vue')
   }})
 export default class Index extends Vue {
   private isError: boolean = false;
+
+  get wineAttributes() {
+    return appStore.wineAttributes;
+  }
+
+  private created() {
+    appStore.SET_TITLE('入力');
+  }
+
+  //ボタンが押された時の処理
+  private async submit() {
+    console.log(appStore.IsAllValueSet());
+    if(!appStore.IsAllValueSet()){
+      this.isError = true;
+      return
+    }
+    this.isError = false;
+    await appStore.POST_WINE_VALUE();
+    await this.$router.push('/result')
+  }
 }
 </script>
 <style>
